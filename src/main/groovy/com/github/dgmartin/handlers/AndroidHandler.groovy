@@ -45,8 +45,9 @@ class AndroidHandler implements DragoHandler {
         Node stringResources = new XmlParser().parse(sourceFile)
 
         for (Node stringNode : (List<Node>) stringResources.children()) {
-            boolean translatable = Boolean.valueOf(stringNode.@translatable)
-            if (translatable) {
+            def translatable = stringNode.@translatable
+            // We only skip a translation when a tag explicitly says that it is not translatable. Otherwise we continue.
+            if (translatable != "false") {
                 String key = stringNode.@name
                 String value = stringNode.text()
 
