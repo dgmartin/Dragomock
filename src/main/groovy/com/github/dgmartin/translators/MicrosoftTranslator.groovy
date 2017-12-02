@@ -1,0 +1,84 @@
+/*
+ * Copyright 2017  Daniel Martin
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.github.dgmartin.translators
+
+import org.apache.log4j.Logger
+
+/**
+ * This translator is used specifically to utilize the Microsoft Translation Text API to translate strings.
+ *
+ * @since 1.0
+ */
+class MicrosoftTranslator implements DragoTranslator {
+
+    Logger logger = Logger.getLogger(this.getClass())
+    private String microsoftSubscriptionKey
+    private String sourceLocal
+    private String translationLocal
+
+    MicrosoftTranslator(String microsoftSubscriptionKey, String sourceLocal, String translationLocal) {
+        this.microsoftSubscriptionKey = microsoftSubscriptionKey
+        this.sourceLocal = sourceLocal
+        this.translationLocal = translationLocal
+    }
+
+    @Override
+    String translateString(String value) {
+        String translation = null
+        def xmlTranslation = fetchTranslation(value)
+        if (xmlTranslation != null) {
+            translation = xmlTranslation.text()
+        }
+
+        return translation
+    }
+
+    /**
+     * This method calls the Microsoft Translator and returns a XML node containing the translated text.
+     *
+     * @param The string to translate.
+     * @return The {@link Node} containing the translated text.
+     *
+     * @since 1.0
+     */
+    Node fetchTranslation(String value) {
+        def xmlTranslation = null
+
+        def encodedEnglishString = URLEncoder.encode(value, 'UTF-8')
+
+        def connection = new URL("https://api.microsofttranslator.com/V2/Http.svc/Translate?" +
+                "from=" + sourceLocal +
+                "&to=" + translationLocal +
+                "&text=" + encodedEnglishString)
+                .openConnection() as HttpURLConnection
+
+        connection.setRequestProperty('Ocp-Apim-Subscription-Key', microsoftSubscriptionKey)
+
+        logger.debug(Connection: ' + connection.toString()')
+
+        logger.debug('Response code: ' + connection.responseCode)
+        logger.debug('Response message: ' + connection.responseMessage)
+
+        if (connection.responseCode == 200) {
+            xmlTranslation = new XmlParser().parseText(connection.inputStream.text)
+        }
+
+        return xmlTranslation
+    }
+
+
+}

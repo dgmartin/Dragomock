@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string mock_translation='true' name='app_name'>Already Translated</string>
+  <string mock_translation='true' name='tuesday'>Dienstag</string>
+</resources>

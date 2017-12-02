@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">My Application</string>
+  <string name="hello">Hello</string>
+  <string name="tuesday">Tuesday</string>
+  <string name="night">night</string>
+  <string name="how_are_you">How are you?</string>
+</resources>
