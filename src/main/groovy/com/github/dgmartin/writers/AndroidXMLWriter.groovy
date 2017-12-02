@@ -65,8 +65,8 @@ class AndroidXMLWriter implements DragoWriter {
             if (translatedStrings.children().size() > 0) {
                 logger.debug("File contains XML")
                 for (Node stringNode : (List<Node>) translatedStrings.children()) {
-                    boolean translatable = stringNode.@translatable
-                    boolean isMock = stringNode.@mock_translation
+                    boolean translatable = Boolean.valueOf(stringNode.@translatable)
+                    boolean isMock = Boolean.valueOf(stringNode.@mock_translation)
                     String key = stringNode.@name
                     String value = stringNode.text()
 
