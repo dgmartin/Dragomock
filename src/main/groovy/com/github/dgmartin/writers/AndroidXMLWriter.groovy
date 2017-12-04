@@ -18,6 +18,7 @@ package com.github.dgmartin.writers
 
 import com.github.dgmartin.objects.ExistingTranslation
 import groovy.xml.MarkupBuilder
+import groovy.xml.MarkupBuilderHelper
 import groovy.xml.XmlUtil
 import org.apache.log4j.Logger
 
@@ -82,6 +83,8 @@ class AndroidXMLWriter implements DragoWriter {
 
         def writer = new FileWriter(outputFile)
         def xmlMarkup = new MarkupBuilder(writer)
+        xmlMarkup.mkp.xmlDeclaration(version: "1.0", encoding: "utf-8")
+//        TODO add copyright xmlMarkup.mkp.comment(copyright)
 
         logger.trace("Existing transactions array: " + existingTranslations.toString())
         logger.trace("New Translations array: " + translations.toString())
