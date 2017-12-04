@@ -14,19 +14,29 @@
  * limitations under the License.
  */
 
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.gradle.publish:plugin-publish-plugin:0.9.9"
+    }
+}
+
 group 'com.github.dgmartin'
 version '0.5'
 
+repositories {
+    mavenCentral()
+}
 apply plugin: 'groovy'
 apply plugin: 'java-gradle-plugin'
 apply plugin: 'maven'
 
 apply from: "$rootDir/gradle/functional-test.gradle"
-
-repositories {
-    mavenCentral()
-}
-
+apply plugin: "com.gradle.plugin-publish"
 
 uploadArchives {
     repositories {
@@ -38,12 +48,28 @@ uploadArchives {
 
 dependencies {
     compile gradleApi()
-//    compile localGroovy()
-//    compile group: 'com.sun.jersey', name: 'jersey-client', version: '1.14'
-//    compile 'org.codehaus.groovy:groovy-all:2.4.12'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 
     testCompile('org.spockframework:spock-core:1.1-groovy-2.4') {
         exclude group: 'org.codehaus.groovy'
+    }
+}
+
+// The configuration example below shows the minimum required properties
+// configured to publish your plugin to the plugin portal
+pluginBundle {
+    website = 'https://github.com/dgmartin/Dragomock'
+    vcsUrl = 'https://github.com/dgmartin/Dragomock'
+
+
+    plugins {
+        dragomockPlugin {
+            id = 'com.github.dgmartin.Dragomock'
+            displayName = 'Dragomock Plugin'
+            description = "Dragomock is a mock translation generator. It is used to create more natural mock translations " +
+                    "that provide developers a better idea of how their code and UI will perform under more natural " +
+                    "localization test cases. It can also be used for demonstrating the localization abilities in an app."
+            tags = ['Android', 'Strings','Translate']
+        }
     }
 }
