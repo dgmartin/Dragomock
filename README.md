@@ -1,5 +1,10 @@
 # Dragomock
 
+> #### Dragoman
+> \[drag-uh-muh n]  
+> noun, plural dragomans, dragomen.  
+> 1\. (in the Near East) a professional interpreter.  
+
 Dragomock is a mock translation generator. It is used to create more natural mock translations that provide 
 developers a better idea of how their code and UI will perform under more natural localization test cases. It can 
 also be used for demonstrating the localization abilities in an app.
@@ -62,7 +67,8 @@ translation
 ## Subscriptions
 
 The subscriptions keys are used to determine which translation API to use. Currently Dragomock only supports the 
-Microsoft Translator Text API however there are plans to include the Google Cloud Translation API as well.
+Microsoft Translator Text API however there are plans to include the Google Cloud Translation API as well. For 
+security reasons it is best to set the keys via the "gradle.properties" file and reference them later.
 
 To utilize the Microsoft Translator Text API you must provide a subscription key in the "microsoftSubscriptionKey" 
 parameter. To obtain a key please see the documentation at the 
