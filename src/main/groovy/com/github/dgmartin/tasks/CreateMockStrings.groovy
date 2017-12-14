@@ -345,8 +345,10 @@ class CreateMockStrings extends DefaultTask {
             translator = new MicrosoftTranslator(getMicrosoftSubscriptionKey(), getSourceLocal(), local)
         } else if (getGoogleSubscriptionKey()) {
             logger.debug("Creating Google Translator")
+            println "Creating Google Translator"
             translator = new GoogleTranslator()
         }
+        println "Translator: " + translator
 
         return translator
     }

@@ -67,7 +67,7 @@ class TranslationFileCreator {
                     logger.debug("Final String: ${finalString}")
                     writer.put(key, finalString)
                 } else {
-                    logger.w("Error translating string")
+                    logger.warn("Error translating string")
                 }
             }
         }
