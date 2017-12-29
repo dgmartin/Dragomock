@@ -29,27 +29,26 @@ dragomock {
     sourceLocal = "en"
     locals = ["ru", "de"]
     fileType = "TYPE_ANDROID_XML" as com.github.dgmartin.constants.FileType
-    microsoftSubscriptionKey = <set Microsoft key here>
+    microsoftSubscriptionKey = &lt;set Microsoft key here>
     inputFile = file('/res/values/strings.xml')
     outputDir = file('/res/')
 }
 ~~~
 
 In the example above we are translating the strings.xml file from english ("en") to Russian ("ru") and German ("de").
- The file will be treated as an Android XML String resource file and all translation folders will be written to the 
+ The file will be treated as an Android XML String resource file and all translation folders will be written to the
  "/res/" directory.
 
 Below is a detailed list of the different parameters and there descriptions.
 
-|Parameter Name|Required|Details|
-|--|--|--|
-|sourceLocal|Required|The two letter language code for the original language of the source file|
-|locals|Required|String array of the two letter language codes that you want translated|
-|fileType|Required|Enum defining the values. See the [File Types](#file-types) section below for further details|
-|microsoftSubscriptionKey|Required|The Microsoft Subscription key used to access the Microsoft Translation API. See 
-the [Subscriptions](#subscriptions) section for further details.|
-|inputFile|Required|The source file that will be translated|
-|outputDir|Required|The directory file in which the translated file(s) will be written to|
+|Parameter Name|Required|Default|Details|
+|--|--|--|--|
+|sourceLocal|Optional|en|The two letter language code for the original language of the source file|
+|locals|Required|n/a|String array of the two letter language codes that you want translated|
+|fileType|Optional|TYPE_ANDROID_XML|Enum defining the values. See the [File Types](#file-types) section below for further details|
+|microsoftSubscriptionKey|Required|n/a|The Microsoft Subscription key used to access the Microsoft Translation API. See the [Subscriptions](#subscriptions) section for further details.|
+|inputFile|Optional|&lt;root>/src/main/res/values/strings.xml|The source file that will be translated|
+|outputDir|Optional|&lt;inputFile>/../..|The directory file in which the translated file(s) will be written to|
 
 ## File Types
 
