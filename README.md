@@ -75,7 +75,6 @@ parameter. To obtain a key please see the documentation at the
 
 ## Planned Improvements
 
- - Default values allowing for fewer required parameters
  - Addition of iOS Key-Value Pair String file translations
  - Addition of iOS P-Type String file translations
  - Addition of CSV String file translations
