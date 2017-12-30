@@ -42,7 +42,7 @@ import org.gradle.api.tasks.TaskAction
  * @since 1.0
  */
 class CreateMockStrings extends DefaultTask {
-    final Property<String> sourceLocal
+    final Property<String> sourceLocal       
     final Property<List<String>> locals
     final Property<FileType> fileType
     final Property<String> microsoftSubscriptionKey

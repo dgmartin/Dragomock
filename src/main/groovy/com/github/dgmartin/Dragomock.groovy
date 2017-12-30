@@ -32,9 +32,9 @@ class Dragomock implements Plugin<Project> {
     void apply(Project project) {
         def extension = project.extensions.create("dragomock", DragoPluginExtension, project)
         project.task('createMockStrings', type: CreateMockStrings) {
-            sourceLocal =extension.getSourceLocalProvider()
-            locals =extension.getLocalsProvider()
-            fileType=extension.getFileTypeProvider()
+            sourceLocal = extension.getSourceLocalProvider()
+            locals = extension.getLocalsProvider()
+            fileType = extension.getFileTypeProvider()
             microsoftSubscriptionKey = extension.getMicrosoftSubscriptionKeyProvider()
             googleSubscriptionKey = extension.getGoogleSubscriptionKeyProvider()
             inputFile = extension.getInputProvider()

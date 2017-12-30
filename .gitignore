@@ -16,7 +16,9 @@ gradle-app.setting
 out/
 /Repo/
 app/
-/TranslationProject/test
+
+/TranslationProject/test/*
+!/TranslationProject/test/values
 
 *.iml
 .idea

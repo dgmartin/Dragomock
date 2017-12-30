@@ -38,24 +38,34 @@ class DragoPluginExtension {
     DragoPluginExtension(Project project) {
         sourceLocal = project.objects.property(String.class)
         sourceLocal.set("en")
+
         locals = (Property<List<String>>) (Object) project.objects.property(List.class)
+
         fileType = project.objects.property(FileType.class)
+        fileType.set(FileType.TYPE_ANDROID_XML)
+
         microsoftSubscriptionKey = project.objects.property(String)
         microsoftSubscriptionKey.set(null)
+
         googleSubscriptionKey = project.objects.property(String.class)
         googleSubscriptionKey.set(null)
+
         inputFile = project.objects.property(File)
+        inputFile.set(new File("src/main/res/values/strings.xml"))
+
         outputDir = project.objects.property(File)
+        inputFile.set(new File("src/main/res"))
     }
 
     @Override
     String toString() {
-        return "local: " + locals.toString() +
+        return "source local: ${sourceLocal}" +
+                " local: " + locals.toString() +
+                " fileType: ${fileType}" +
                 " microsoftSubscriptionKey" + microsoftSubscriptionKey.toString() +
+                " googleSubscriptionKey: ${googleSubscriptionKey}" +
                 " inputFile: " + inputFile.toString() +
                 " outputDir: " + outputDir.toString()
-
-        //TODO update this
     }
 
     /**
