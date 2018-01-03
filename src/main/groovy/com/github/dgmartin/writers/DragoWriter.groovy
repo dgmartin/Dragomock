@@ -38,6 +38,20 @@ interface DragoWriter {
     File getOutputFile()
 
     /**
+     * @param copyright The optional copyright text that will be added to all output files.
+     *
+     * @since 1.0
+     */
+    void setCopyright(String copyright)
+
+    /**
+     * @return The copyright text set for this writer.
+     *
+     * @since 1.0
+     */
+    String getCopyright()
+
+    /**
      * Used to add a key-value pair to be written to the output file.
      * @param key The string key for the pair.
      * @param value The string value for the pair

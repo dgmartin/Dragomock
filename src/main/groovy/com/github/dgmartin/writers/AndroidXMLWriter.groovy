@@ -21,6 +21,7 @@ import groovy.xml.MarkupBuilder
 import groovy.xml.MarkupBuilderHelper
 import groovy.xml.XmlUtil
 import org.apache.log4j.Logger
+import org.gradle.util.TextUtil
 
 /**
  * This writer is specifically designed to be used with the Android String Resource system and writes all key-value
@@ -32,6 +33,7 @@ class AndroidXMLWriter implements DragoWriter {
     Logger logger = Logger.getLogger(this.getClass())
     LinkedHashMap<String, String> translations = new LinkedHashMap<>()
     File outputFile = null
+    String copyright = null
 
 
     AndroidXMLWriter() {
@@ -45,6 +47,16 @@ class AndroidXMLWriter implements DragoWriter {
     @Override
     File getOutputFile() {
         return outputFile
+    }
+
+    @Override
+    void setCopyright(String copyright) {
+        this.copyright = copyright
+    }
+
+    @Override
+    String getCopyright() {
+        return copyright
     }
 
     @Override
@@ -84,7 +96,9 @@ class AndroidXMLWriter implements DragoWriter {
         def writer = new FileWriter(outputFile)
         def xmlMarkup = new MarkupBuilder(writer)
         xmlMarkup.mkp.xmlDeclaration(version: "1.0", encoding: "utf-8")
-//        TODO add copyright xmlMarkup.mkp.comment(copyright)
+        if (getCopyright()?.trim()) {
+            xmlMarkup.mkp.comment(getCopyright())
+        }
 
         logger.trace("Existing transactions array: " + existingTranslations.toString())
         logger.trace("New Translations array: " + translations.toString())
