@@ -44,7 +44,7 @@ class GoogleTranslator implements DragoTranslator {
     }
 
     private String fetchTranslation(String value) {
-        String translation
+        String translation = null
 
         def encodedEnglishString = URLEncoder.encode(value, 'UTF-8')
         def queryString = "source=${sourceLocal}" +
@@ -76,8 +76,12 @@ class GoogleTranslator implements DragoTranslator {
         if (connection.responseCode == 200) {
             def json = new JsonSlurper().parseText(connection.inputStream.text)
             println json.toString()
-            String[] translationArray = json.data.translations
-            translation = translationArray[0]
+
+            ArrayList translationArray = json.data.translations
+            logger.debug("TranslationArray: ${translationArray}")
+
+            translation = translationArray[0].translatedText.toString()
+            logger.debug("Translation: ${translation}")
         }
 
         return translation

@@ -26,9 +26,12 @@ class DragomockFunctionalTest extends Specification {
     TemporaryFolder testProjectDir = new TemporaryFolder()
     File buildFile
     String microsoftSubscriptionKey
+    String googleSubscriptionKey
 
     def setup() {
-        microsoftSubscriptionKey = System.getProperty('microsoftSubscriptionKey')
+        microsoftSubscriptionKey = System.getProperty('microsoftKey')
+        googleSubscriptionKey = System.getProperty('googleKey')
+
 //        File stringsDir = testProjectDir.newFolder('res', 'values')
 //        stringsDir.mkdirs()
 //        androidEnglishStrings = new File(stringsDir.getAbsolutePath(), 'strings.xml')
@@ -69,9 +72,7 @@ class DragomockFunctionalTest extends Specification {
 //        result.task(":createMockStrings").outcome == SUCCESS
 //    }
 
-    def "can run normal translate"() {
-
-        String googleSubscriptionKey  = System.getProperty('googleSubscriptionKey')
+    def "can run normal translate with Google"() {
         buildFile << """
         dragomock {  
                 locals = ["ru"]
@@ -147,7 +148,7 @@ class DragomockFunctionalTest extends Specification {
 
 
     void createMockFile(String dir, String name, String importData) {
-        File stringsDir = new File(testProjectDir.getRoot().getAbsolutePath()+dir)
+        File stringsDir = new File(testProjectDir.getRoot().getAbsolutePath() + dir)
         stringsDir.mkdirs()
         File newFile = new File(stringsDir.getAbsolutePath(), name)
         if (importData) {

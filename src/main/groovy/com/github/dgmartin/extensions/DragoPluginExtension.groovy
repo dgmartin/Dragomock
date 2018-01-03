@@ -45,10 +45,10 @@ class DragoPluginExtension {
         fileType.set(FileType.TYPE_ANDROID_XML)
 
         microsoftSubscriptionKey = project.objects.property(String)
-        microsoftSubscriptionKey.set(null)
+        microsoftSubscriptionKey.set("")
 
         googleSubscriptionKey = project.objects.property(String.class)
-        googleSubscriptionKey.set(null)
+        googleSubscriptionKey.set("")
 
         inputFile = project.objects.property(File)
         inputFile.set(new File("src/main/res/values/strings.xml"))

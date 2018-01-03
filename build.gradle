@@ -55,6 +55,15 @@ dependencies {
     }
 }
 
+test {
+    testLogging {
+        // Make sure output from
+        // standard out or error is shown
+        // in Gradle output.
+        showStandardStreams = true
+    }
+}
+
 // The configuration example below shows the minimum required properties
 // configured to publish your plugin to the plugin portal
 pluginBundle {
@@ -69,7 +78,7 @@ pluginBundle {
             description = "Dragomock is a mock translation generator. It is used to create more natural mock translations " +
                     "that provide developers a better idea of how their code and UI will perform under more natural " +
                     "localization test cases. It can also be used for demonstrating the localization abilities in an app."
-            tags = ['Android', 'Strings','Translate']
+            tags = ['Android', 'Strings', 'Translate']
         }
     }
 }

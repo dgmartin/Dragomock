@@ -34,6 +34,7 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
+import org.gradle.internal.impldep.org.apache.http.util.TextUtils
 
 /**
  * This is the main task for translating string files. The {@link DragoPluginExtension} data from the build script
@@ -42,7 +43,7 @@ import org.gradle.api.tasks.TaskAction
  * @since 1.0
  */
 class CreateMockStrings extends DefaultTask {
-    final Property<String> sourceLocal       
+    final Property<String> sourceLocal
     final Property<List<String>> locals
     final Property<FileType> fileType
     final Property<String> microsoftSubscriptionKey
@@ -67,7 +68,8 @@ class CreateMockStrings extends DefaultTask {
     @Override
     String toString() {
         return "local: " + locals.toString() +
-                " microsoftSubscriptionKey" + microsoftSubscriptionKey.toString() +
+                " microsoftSubscriptionKey " + microsoftSubscriptionKey.toString() +
+                " googleSubscriptionKey " + googleSubscriptionKey.toString() +
                 " inputFile: " + inputFile.toString() +
                 " outputDir: " + outputDir.toString()
     }
@@ -194,7 +196,7 @@ class CreateMockStrings extends DefaultTask {
      *
      * @since 1.0
      */
-    String getGoogleSubscriptionKey() {
+    private String getGoogleSubscriptionKey() {
         logger.trace("Returning GoogleKey")
         googleSubscriptionKey.get()
     }
@@ -338,15 +340,19 @@ class CreateMockStrings extends DefaultTask {
      */
     private DragoTranslator getTranslator(String local) {
         logger.debug("Creating New Translator")
-        DragoTranslator translator = null
+        DragoTranslator translator
 
-        if (getMicrosoftSubscriptionKey()) {
+        if (getMicrosoftSubscriptionKey()?.trim()) {
             logger.debug("Creating Microsoft Translator")
             translator = new MicrosoftTranslator(getMicrosoftSubscriptionKey(), getSourceLocal(), local)
-        } else if (getGoogleSubscriptionKey()) {
+        } else if (getGoogleSubscriptionKey()?.trim()) {
             logger.debug("Creating Google Translator")
             println "Creating Google Translator"
-            translator = new GoogleTranslator()
+            translator = new GoogleTranslator(getGoogleSubscriptionKey(), getSourceLocal(), local)
+        } else {
+            logger.error("Missing subscription!")
+            throw new NullPointerException("No subscription key found. Must include one of MicrosoftSubscriptionKey " +
+                    "or GoogleSubscriptionKey.")
         }
         println "Translator: " + translator
 
