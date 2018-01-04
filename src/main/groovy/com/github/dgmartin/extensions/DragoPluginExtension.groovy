@@ -57,6 +57,7 @@ class DragoPluginExtension {
         outputDir = project.objects.property(File)
 
         copyright = project.objects.property(String.class)
+        copyright.set("")
     }
 
     @Override
