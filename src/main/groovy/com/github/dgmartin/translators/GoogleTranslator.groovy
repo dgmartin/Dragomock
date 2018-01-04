@@ -20,7 +20,7 @@ import groovy.json.JsonSlurper
 import org.apache.log4j.Logger
 
 /**
- * TODO Add documentation
+ * This translator is used specifically to utilize the Google Cloud Translate API to translate strings.
  *
  * @since 1.0
  */

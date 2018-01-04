@@ -25,6 +25,7 @@ import com.github.dgmartin.handlers.XCodePListHandler
 import com.github.dgmartin.translators.DragoTranslator
 import com.github.dgmartin.translators.GoogleTranslator
 import com.github.dgmartin.translators.MicrosoftTranslator
+import com.github.dgmartin.utils.DragoUtils
 import com.github.dgmartin.utils.TranslationFileCreator
 import com.github.dgmartin.writers.DragoWriter
 import org.gradle.api.DefaultTask
@@ -342,10 +343,10 @@ class CreateMockStrings extends DefaultTask {
         logger.debug("Creating New Translator")
         DragoTranslator translator
 
-        if (getMicrosoftSubscriptionKey()?.trim()) {
+        if (DragoUtils.isNotEmpty(getMicrosoftSubscriptionKey())) {
             logger.debug("Creating Microsoft Translator")
             translator = new MicrosoftTranslator(getMicrosoftSubscriptionKey(), getSourceLocal(), local)
-        } else if (getGoogleSubscriptionKey()?.trim()) {
+        } else if (DragoUtils.isNotEmpty(getGoogleSubscriptionKey())) {
             logger.debug("Creating Google Translator")
             println "Creating Google Translator"
             translator = new GoogleTranslator(getGoogleSubscriptionKey(), getSourceLocal(), local)
