@@ -26,9 +26,12 @@ class DragomockFunctionalTest extends Specification {
     TemporaryFolder testProjectDir = new TemporaryFolder()
     File buildFile
     String microsoftSubscriptionKey
+    String googleSubscriptionKey
 
     def setup() {
-        microsoftSubscriptionKey = System.getProperty('microsoftSubscriptionKey')
+        microsoftSubscriptionKey = System.getProperty('microsoftKey')
+        googleSubscriptionKey = System.getProperty('googleKey')
+
 //        File stringsDir = testProjectDir.newFolder('res', 'values')
 //        stringsDir.mkdirs()
 //        androidEnglishStrings = new File(stringsDir.getAbsolutePath(), 'strings.xml')
@@ -69,6 +72,28 @@ class DragomockFunctionalTest extends Specification {
 //        result.task(":createMockStrings").outcome == SUCCESS
 //    }
 
+    def "can run normal translate with Google"() {
+        buildFile << """
+        dragomock {  
+                locals = ["ru"]
+                fileType = "TYPE_ANDROID_XML" as com.github.dgmartin.constants.FileType
+                googleSubscriptionKey = '${googleSubscriptionKey}'
+                inputFile = file('/res/values/strings.xml')
+                outputDir = file('/res/')
+            }"""
+
+        when:
+        def result = GradleRunner.create()
+                .withProjectDir(testProjectDir.root)
+                .withArguments('createMockStrings')
+                .forwardOutput()
+                .withPluginClasspath()
+                .build()
+
+        then:
+        result.task(":createMockStrings").outcome == SUCCESS
+    }
+
 //    def "can translate over previous translations"() {
 //        File stringsDir = testProjectDir.newFolder('res', 'values-de')
 //        stringsDir.mkdirs()
@@ -99,31 +124,31 @@ class DragomockFunctionalTest extends Specification {
 //        result.task(":createMockStrings").outcome == SUCCESS
 //    }
 
-    def "Translate XCode KVP"() {
-        buildFile << """
-        dragomock {
-                locals = ["ru", "de"]
-                fileType = "TYPE_XCODE_KEY_VALUE_PAIR" as com.github.dgmartin.constants.FileType
-                microsoftSubscriptionKey = '${microsoftSubscriptionKey}'
-                inputFile = file('/Views/Storyboards/en.lproj/Main.strings')
-                outputDir = file('/Views/Storyboards/')
-            }"""
-
-        when:
-        def result = GradleRunner.create()
-                .withProjectDir(testProjectDir.root)
-                .withArguments('createMockStrings')
-                .forwardOutput()
-                .withPluginClasspath()
-                .build()
-
-        then:
-        result.task(":createMockStrings").outcome == SUCCESS
-    }
+//    def "Translate XCode KVP"() {
+//        buildFile << """
+//        dragomock {
+//                locals = ["ru", "de"]
+//                fileType = "TYPE_XCODE_KEY_VALUE_PAIR" as com.github.dgmartin.constants.FileType
+//                microsoftSubscriptionKey = '${microsoftSubscriptionKey}'
+//                inputFile = file('/Views/Storyboards/en.lproj/Main.strings')
+//                outputDir = file('/Views/Storyboards/')
+//            }"""
+//
+//        when:
+//        def result = GradleRunner.create()
+//                .withProjectDir(testProjectDir.root)
+//                .withArguments('createMockStrings')
+//                .forwardOutput()
+//                .withPluginClasspath()
+//                .build()
+//
+//        then:
+//        result.task(":createMockStrings").outcome == SUCCESS
+//    }
 
 
     void createMockFile(String dir, String name, String importData) {
-        File stringsDir = new File(testProjectDir.getRoot().getAbsolutePath()+dir)
+        File stringsDir = new File(testProjectDir.getRoot().getAbsolutePath() + dir)
         stringsDir.mkdirs()
         File newFile = new File(stringsDir.getAbsolutePath(), name)
         if (importData) {

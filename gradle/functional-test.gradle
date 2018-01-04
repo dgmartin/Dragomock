@@ -18,7 +18,8 @@ task functionalTest(type: Test) {
     testClassesDirs = sourceSets.functionalTest.output.classesDirs
     classpath = sourceSets.functionalTest.runtimeClasspath
 
-    systemProperty "microsoftSubscriptionKey", System.getProperty('microsoftSubscriptionKey')
+    systemProperty "microsoftKey", microsoftKey
+    systemProperty "googleKey", googleKey
     mustRunAfter test
 }
 
