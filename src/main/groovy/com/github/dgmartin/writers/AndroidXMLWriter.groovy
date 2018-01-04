@@ -17,6 +17,7 @@
 package com.github.dgmartin.writers
 
 import com.github.dgmartin.objects.ExistingTranslation
+import com.github.dgmartin.utils.DragoUtils
 import groovy.xml.MarkupBuilder
 import groovy.xml.MarkupBuilderHelper
 import groovy.xml.XmlUtil
@@ -96,7 +97,7 @@ class AndroidXMLWriter implements DragoWriter {
         def writer = new FileWriter(outputFile)
         def xmlMarkup = new MarkupBuilder(writer)
         xmlMarkup.mkp.xmlDeclaration(version: "1.0", encoding: "utf-8")
-        if (getCopyright()?.trim()) {
+        if (DragoUtils.isNotEmpty(getCopyright())) {
             xmlMarkup.mkp.comment(getCopyright())
             xmlMarkup.mkp.yield(System.getProperty("line.separator"))
         }
