@@ -98,6 +98,7 @@ class AndroidXMLWriter implements DragoWriter {
         xmlMarkup.mkp.xmlDeclaration(version: "1.0", encoding: "utf-8")
         if (getCopyright()?.trim()) {
             xmlMarkup.mkp.comment(getCopyright())
+            xmlMarkup.mkp.yield(System.getProperty("line.separator"))
         }
 
         logger.trace("Existing transactions array: " + existingTranslations.toString())
