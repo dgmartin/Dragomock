@@ -343,13 +343,13 @@ class CreateMockStrings extends DefaultTask {
         logger.debug("Creating New Translator")
         DragoTranslator translator
 
-        if (DragoUtils.isNotEmpty(getMicrosoftSubscriptionKey())) {
-            logger.debug("Creating Microsoft Translator")
-            translator = new MicrosoftTranslator(getMicrosoftSubscriptionKey(), getSourceLocal(), local)
-        } else if (DragoUtils.isNotEmpty(getGoogleSubscriptionKey())) {
+        if (DragoUtils.isNotEmpty(getGoogleSubscriptionKey())) {
             logger.debug("Creating Google Translator")
             println "Creating Google Translator"
             translator = new GoogleTranslator(getGoogleSubscriptionKey(), getSourceLocal(), local)
+        } else if (DragoUtils.isNotEmpty(getMicrosoftSubscriptionKey())) {
+            logger.debug("Creating Microsoft Translator")
+            translator = new MicrosoftTranslator(getMicrosoftSubscriptionKey(), getSourceLocal(), local)
         } else {
             logger.error("Missing subscription!")
             throw new NullPointerException("No subscription key found. Must include one of MicrosoftSubscriptionKey " +

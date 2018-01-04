@@ -46,7 +46,8 @@ Below is a detailed list of the different parameters and there descriptions.
 |sourceLocal|Optional|en|The two letter language code for the original language of the source file|
 |locals|Required|n/a|String array of the two letter language codes that you want translated|
 |fileType|Optional|TYPE_ANDROID_XML|Enum defining the values. See the [File Types](#file-types) section below for further details|
-|microsoftSubscriptionKey|Required|n/a|The Microsoft Subscription key used to access the Microsoft Translation API. See the [Subscriptions](#subscriptions) section for further details.|
+|microsoftSubscriptionKey|Optional|n/a|The Microsoft Subscription key used to access the Microsoft Translation API. See the [Subscriptions](#subscriptions) section for further details.|
+|googleSubscriptionKey|Optional|n/a|The Google Subscription key used to access the Google Cloud Translation API. See the [Subscriptions](#subscriptions) section for further details.|
 |inputFile|Optional|&lt;root>/src/main/res/values/strings.xml|The source file that will be translated|
 |outputDir|Optional|&lt;inputFile>/../..|The directory file in which the translated file(s) will be written to|
 
@@ -65,20 +66,26 @@ translation
 
 ## Subscriptions
 
-The subscriptions keys are used to determine which translation API to use. Currently Dragomock only supports the 
-Microsoft Translator Text API however there are plans to include the Google Cloud Translation API as well. For 
+The subscriptions keys are used to determine which translation API to use. Dragomock  supports both the
+Microsoft Translator Text API as well as the Google Cloud Translation API. For
 security reasons it is best to set the keys via the "gradle.properties" file and reference them later.
 
 To utilize the Microsoft Translator Text API you must provide a subscription key in the "microsoftSubscriptionKey" 
 parameter. To obtain a key please see the documentation at the 
 [Microsoft Translator Text API website](https://azure.microsoft.com/en-us/services/cognitive-services/translator-text-api/).
 
+Alternatively to utilize the Google Cloud Translation API you must provide a subscription key in the "googleSubscriptionKey"
+parameter. To obtain a key please see the documentation at the
+[Google Cloud Translation API website](https://cloud.google.com/translate/).
+
+Please note that at least one subscription key must be provided. Only one translator can be used at any given time.
+If both subscription keys are provided the Google Translator service will take priority. If no subscription keys are provided an exception will be thrown.
+
 ## Planned Improvements
 
  - Addition of iOS Key-Value Pair String file translations
  - Addition of iOS P-Type String file translations
  - Addition of CSV String file translations
- - Ability to use Google Translate API instead of Microsoft Translate API
  - Ability to define multiple input files and matching outPut directories
  - JavaDoc improvements
  - Test improvements
