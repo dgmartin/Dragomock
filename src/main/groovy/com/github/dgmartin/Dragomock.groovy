@@ -39,6 +39,7 @@ class Dragomock implements Plugin<Project> {
             googleSubscriptionKey = extension.getGoogleSubscriptionKeyProvider()
             inputFile = extension.getInputProvider()
             outputDir = extension.getOutputDirProvider()
+            copyright = extension.getCopyrightProvider()
 
         }
     }

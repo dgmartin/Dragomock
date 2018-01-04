@@ -51,6 +51,7 @@ class CreateMockStrings extends DefaultTask {
     final Property<String> googleSubscriptionKey
     final Property<File> inputFile
     final Property<File> outputDir
+    final Property<String> copyright
 
     DragoHandler handler
 
@@ -64,6 +65,7 @@ class CreateMockStrings extends DefaultTask {
         this.googleSubscriptionKey = project.objects.property(String.class)
         this.inputFile = project.objects.property(File.class)
         this.outputDir = project.objects.property(File.class)
+        this.copyright = project.objects.property(String.class)
     }
 
     @Override
@@ -256,6 +258,27 @@ class CreateMockStrings extends DefaultTask {
 
     /**
      * <p>
+     * This is used to set the optional copyright text that will be added to all output files.
+     * </p>
+     *
+     * @since 1.0
+     */
+    void setCopyright(Provider<String> copyright) {
+        this.copyright.set(copyright)
+    }
+
+    /**
+     * @return The optional copyright text that will be added to all output files.
+     *
+     * @since 1.0
+     */
+    private String getCopyright() {
+        logger.trace("Returning Copyright")
+        copyright.get()
+    }
+
+    /**
+     * <p>
      * <b>NOTE</b> Do Not Delete
      * </p>
      * <p>
@@ -300,6 +323,7 @@ class CreateMockStrings extends DefaultTask {
 
         DragoWriter writer = handler.getWriter()
         writer.setOutputFile(translationFile)
+        writer.setCopyright(getCopyright())
 
         buildStringList(translationMap, local, writer)
 

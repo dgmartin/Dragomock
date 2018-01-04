@@ -27,6 +27,7 @@ class XCodeKVPWriter implements DragoWriter {
 
     LinkedHashMap<String, String> translations = new LinkedHashMap<>()
     File outputFile = null
+    String copyright = null
 
 
     @Override
@@ -37,6 +38,16 @@ class XCodeKVPWriter implements DragoWriter {
     @Override
     File getOutputFile() {
         return outputFile
+    }
+
+    @Override
+    void setCopyright(String copyright) {
+        this.copyright = copyright
+    }
+
+    @Override
+    String getCopyright() {
+        return copyright
     }
 
     @Override

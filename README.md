@@ -32,6 +32,7 @@ dragomock {
     microsoftSubscriptionKey = &lt;set Microsoft key here>
     inputFile = file('/res/values/strings.xml')
     outputDir = file('/res/')
+    copyright = "Your copyright goes here"
 }
 ~~~
 
@@ -50,6 +51,7 @@ Below is a detailed list of the different parameters and there descriptions.
 |googleSubscriptionKey|Optional|n/a|The Google Subscription key used to access the Google Cloud Translation API. See the [Subscriptions](#subscriptions) section for further details.|
 |inputFile|Optional|&lt;root>/src/main/res/values/strings.xml|The source file that will be translated|
 |outputDir|Optional|&lt;inputFile>/../..|The directory file in which the translated file(s) will be written to|
+|copyright|Optional|n/a|Copyright text that will be added to all output files.|
 
 ## File Types
 

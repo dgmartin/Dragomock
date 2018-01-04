@@ -34,6 +34,7 @@ class DragoPluginExtension {
     final Property<String> googleSubscriptionKey
     final Property<File> inputFile
     final Property<File> outputDir
+    final Property<String> copyright
 
     DragoPluginExtension(Project project) {
         sourceLocal = project.objects.property(String.class)
@@ -54,7 +55,9 @@ class DragoPluginExtension {
         inputFile.set(new File("src/main/res/values/strings.xml"))
 
         outputDir = project.objects.property(File)
-        inputFile.set(new File("src/main/res"))
+
+        copyright = project.objects.property(String.class)
+        copyright.set("")
     }
 
     @Override
@@ -65,7 +68,8 @@ class DragoPluginExtension {
                 " microsoftSubscriptionKey" + microsoftSubscriptionKey.toString() +
                 " googleSubscriptionKey: ${googleSubscriptionKey}" +
                 " inputFile: " + inputFile.toString() +
-                " outputDir: " + outputDir.toString()
+                " outputDir: " + outputDir.toString() +
+                " copyright: ${copyright}"
     }
 
     /**
@@ -195,5 +199,23 @@ class DragoPluginExtension {
      */
     void setOutputDir(File outputDir) {
         this.outputDir.set(outputDir)
+    }
+
+    /**
+     * @return The {@link Provider} containing the optional copyright text that will be added to all output files.
+     *
+     * @since 1.0
+     */
+    Provider<String> getCopyrightProvider() {
+        copyright
+    }
+
+    /**
+     * @param copyright The optional copyright text that will be added to all output files.
+     *
+     * @since 1.0
+     */
+    void setCopyright(String copyright) {
+        this.copyright.set(copyright)
     }
 }
