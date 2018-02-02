@@ -27,7 +27,7 @@ enum FileType {
      *  Used to specify resource XML files as defined by the Android operating system
      *  <a href="https://developer.android.com/guide/topics/resources/string-resource.html">here</a>
      *
-     *  @see <a href="https://developer.android.com/guide/topics/resources/string-resource.html">String Resources</a>
+     * @see <a href="https://developer.android.com/guide/topics/resources/string-resource.html">String Resources</a>
      * @since 1.0
      */
     TYPE_ANDROID_XML,
@@ -52,4 +52,27 @@ enum FileType {
      * @since 1.0
      */
     TYPE_CSV
+
+    static FileType getFileType(String fileType) {
+        FileType ftValue
+        switch (fileType) {
+            case "TYPE_XCODE_P_LIST":
+                ftValue = TYPE_XCODE_P_LIST
+                break
+            case "TYPE_XCODE_KEY_VALUE_PAIR":
+                ftValue = TYPE_XCODE_KEY_VALUE_PAIR
+                break
+            case "TYPE_CSV":
+                ftValue = TYPE_CSV
+                break
+            case "TYPE_ANDROID_XML":
+                ftValue = TYPE_ANDROID_XML
+                break
+            default:
+                throw new IllegalArgumentException("Illegal FileType Value. Must be one of: TYPE_ANDROID_XML, " +
+                        "TYPE_CSV, TYPE_XCODE_KEY_VALUE_PAIR, TYPE_XCODE_P_LIST")
+                break
+        }
+        return ftValue
+    }
 }

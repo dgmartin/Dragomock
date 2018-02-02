@@ -149,7 +149,7 @@ class CreateMockStrings extends DefaultTask {
      *
      * @since 1.0
      */
-    String getFileType() {
+    FileType getFileType() {
         logger.trace("Returning FileType")
         fileType.get()
     }

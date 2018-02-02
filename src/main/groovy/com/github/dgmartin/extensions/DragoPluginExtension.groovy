@@ -129,6 +129,10 @@ class DragoPluginExtension {
         this.fileType.set(fileType)
     }
 
+    void setFileType(String fileType) {
+        setFileType(FileType.getFileType(fileType))
+    }
+
     /**
      * @return The {@link Provider} containing the Microsoft subscription used to enable the Translation API.
      *
