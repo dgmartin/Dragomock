@@ -28,7 +28,7 @@ To setup Dragomock in your project add the following to the build.gradle file fo
 dragomock {
     sourceLocal = "en"
     locals = ["ru", "de"]
-    fileType = "TYPE_ANDROID_XML" as com.github.dgmartin.constants.FileType
+    fileType = "TYPE_ANDROID_XML"
     microsoftSubscriptionKey = &lt;set Microsoft key here>
     inputFile = file('/res/values/strings.xml')
     outputDir = file('/res/')
@@ -46,7 +46,7 @@ Below is a detailed list of the different parameters and there descriptions.
 |--|--|--|--|
 |sourceLocal|Optional|en|The two letter language code for the original language of the source file|
 |locals|Required|n/a|String array of the two letter language codes that you want translated|
-|fileType|Optional|TYPE_ANDROID_XML|Enum defining the values. See the [File Types](#file-types) section below for further details|
+|fileType|Optional|TYPE_ANDROID_XML|Enum or string equivalent defining the values. See the [File Types](#file-types) section below for further details|
 |microsoftSubscriptionKey|Optional|n/a|The Microsoft Subscription key used to access the Microsoft Translation API. See the [Subscriptions](#subscriptions) section for further details.|
 |googleSubscriptionKey|Optional|n/a|The Google Subscription key used to access the Google Cloud Translation API. See the [Subscriptions](#subscriptions) section for further details.|
 |inputFile|Optional|&lt;root>/src/main/res/values/strings.xml|The source file that will be translated|
@@ -82,6 +82,17 @@ parameter. To obtain a key please see the documentation at the
 
 Please note that at least one subscription key must be provided. Only one translator can be used at any given time.
 If both subscription keys are provided the Google Translator service will take priority. If no subscription keys are provided an exception will be thrown.
+
+## Release Notes
+
+#### 0.6.0
+ - Added Translation Util project for testing and running Dragomock
+ - Added the ability to rely on default values for many of the properties when declaring your DragoMock settings in build.gradle
+ - Dragomock now supports the use of the Google Cloud Translation API
+ - Added support for including copyright information into your generated files
+ - DragoPluginExtension now allows for the FileType to be declared as a string value. FileType class import is no longer required when declaring your DragoMock settings in build.gradle
+ - Code cleanup and updated documentation
+
 
 ## Planned Improvements
 
