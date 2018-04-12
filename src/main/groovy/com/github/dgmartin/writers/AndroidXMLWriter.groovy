@@ -133,6 +133,8 @@ class AndroidXMLWriter implements DragoWriter {
             }
         }
 
+        writer.close()
+
         translations = null
         outputFile = null
     }
