@@ -85,6 +85,9 @@ If both subscription keys are provided the Google Translator service will take p
 
 ## Release Notes
 
+#### 0.7.00
+ - Fixed memory leak due to not properly closing a file writer
+ 
 #### 0.6.0
  - Added Translation Util project for testing and running Dragomock
  - Added the ability to rely on default values for many of the properties when declaring your DragoMock settings in build.gradle
@@ -102,7 +105,7 @@ If both subscription keys are provided the Google Translator service will take p
  - Ability to define multiple input files and matching outPut directories
  - JavaDoc improvements
  - Test improvements
- - Copy over xml headers and copyright
+ - Copy over xml headers
  
 ## Known Issues
  - Due to the way the Microsoft Translator handles them, you may see abnormalities when translating strings with 
