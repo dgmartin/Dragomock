@@ -32,10 +32,10 @@ buildscript {
     dependencies {
         
 //        Use this for testing the local repo
-//        classpath "com.github.dgmartin:dragomock:0.5"
+        classpath "com.github.dgmartin:dragomock:0.8.00"
         
 //        Use this for testing with the live version
-        classpath "gradle.plugin.com.github.dgmartin:dragomock:0.6.0"
+//        classpath "gradle.plugin.com.github.dgmartin:dragomock:0.8.00"
     }
 }
 
