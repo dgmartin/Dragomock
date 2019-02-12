@@ -60,9 +60,9 @@ class AndroidHandler implements DragoHandler {
 
     @Override
     File getTranslationFile(File outputDir, String local) {
-        def translationDirString = outputDir.getAbsolutePath() + "\\values-" + local
-        logger.debug("Translation Dir string:" + translationDirString)
-        def translationDir = new File(translationDirString)
+        def translationDir =  new File(outputDir.getAbsolutePath() ,"values-" + local)
+        logger.debug("Translation Dir: " + translationDir.getAbsolutePath())
+
         if (!translationDir.exists()) {
             logger.debug("Translation directory \"" + translationDir.getAbsolutePath() +
                     "\" does not exist. Creating directory.")
