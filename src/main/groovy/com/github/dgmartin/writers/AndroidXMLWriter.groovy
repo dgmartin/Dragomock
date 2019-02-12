@@ -80,7 +80,9 @@ class AndroidXMLWriter implements DragoWriter {
                 logger.debug("File contains XML")
                 for (Node stringNode : (List<Node>) translatedStrings.children()) {
                     boolean translatable = Boolean.valueOf(stringNode.@translatable)
-                    boolean isMock = Boolean.valueOf(stringNode.@mock_translation)
+                    // We check if it contains the old "mock_translation" tag or the new tag to determine if its mock data
+                    boolean isMock = (Boolean.valueOf(stringNode.@mock_translation) ||
+                            Boolean.valueOf(stringNode.@dragomock))
                     String key = stringNode.@name
                     String value = stringNode.text()
 
@@ -115,7 +117,7 @@ class AndroidXMLWriter implements DragoWriter {
                 logger.trace("Existing Key: " + existingTranslation.getKey() + " and Value: " +
                         existingTranslation.getValue())
                 Map<String, String> existingElements = new HashMap<>()
-                existingElements.put('mock_translation', existingTranslation.isMock())
+                existingElements.put('dragomock', existingTranslation.isMock())
                 existingElements.put('name', existingTranslation.getKey())
 
                 xmlMarkup.string(existingElements, existingTranslation.getValue())
@@ -124,7 +126,7 @@ class AndroidXMLWriter implements DragoWriter {
 
             for (String key : translations.keySet()) {
                 Map<String, String> newElements = new HashMap<>()
-                newElements.put('mock_translation', 'true')
+                newElements.put('dragomock', 'true')
                 newElements.put('name', key)
 
                 String value = translations.get(key)
