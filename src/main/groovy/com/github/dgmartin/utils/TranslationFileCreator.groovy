@@ -18,7 +18,8 @@ package com.github.dgmartin.utils
 
 import com.github.dgmartin.translators.DragoTranslator
 import com.github.dgmartin.writers.DragoWriter
-import org.apache.log4j.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import java.util.regex.Matcher
 import java.util.regex.Pattern
@@ -30,7 +31,7 @@ import java.util.regex.Pattern
  * @since 1.0
  */
 class TranslationFileCreator {
-    private Logger logger = Logger.getLogger(this.getClass())
+    private Logger logger = LoggerFactory.getLogger('Dragomock')
 
     final String FORMATTED_STRING_PATTERN = /%[0-9]+\$[a-z]/
     final String NO_TRANSLATE_PATTERN = /<div class="notranslate">.*<\/div>/
@@ -199,7 +200,7 @@ class TranslationFileCreator {
      * @since 1.0
      */
     static class Builder {
-        private Logger builderLogger = Logger.getLogger(this.getClass())
+        private Logger builderLogger = LoggerFactory.getLogger('Dragomock')
         private TranslationFileCreator fileBuilder
 
         Builder() {

@@ -18,7 +18,8 @@ package com.github.dgmartin.handlers
 
 import com.github.dgmartin.writers.AndroidXMLWriter
 import com.github.dgmartin.writers.DragoWriter
-import org.apache.log4j.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * This handler is specifically designed to be used with the Android String Resource system. It is responsible for
@@ -28,7 +29,7 @@ import org.apache.log4j.Logger
  */
 class AndroidHandler implements DragoHandler {
 
-    Logger logger = Logger.getLogger(this.getClass())
+    Logger logger = LoggerFactory.getLogger('Dragomock')
     HashMap<String, String> originalMap
 
     @Override

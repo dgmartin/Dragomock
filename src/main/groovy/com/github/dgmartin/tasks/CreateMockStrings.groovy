@@ -35,7 +35,6 @@ import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
-import org.gradle.internal.impldep.org.apache.http.util.TextUtils
 
 /**
  * This is the main task for translating string files. The {@link DragoPluginExtension} data from the build script
@@ -393,8 +392,7 @@ class CreateMockStrings extends DefaultTask {
         DragoTranslator translator
 
         if (DragoUtils.isNotEmpty(getGoogleSubscriptionKey())) {
-            logger.debug("Creating Google Translatord")
-            println "Creating Google Translatorp"
+            logger.debug("Creating Google Translator")
             translator = new GoogleTranslator(getGoogleSubscriptionKey(), getSourceLocal(), local)
         } else if (DragoUtils.isNotEmpty(getMicrosoftSubscriptionKey())) {
             logger.debug("Creating Microsoft Translator")
@@ -404,7 +402,6 @@ class CreateMockStrings extends DefaultTask {
             throw new NullPointerException("No subscription key found. Must include one of MicrosoftSubscriptionKey " +
                     "or GoogleSubscriptionKey.")
         }
-        println "Translator: " + translator
 
         return translator
     }

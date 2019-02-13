@@ -17,7 +17,8 @@
 package com.github.dgmartin.translators
 
 import groovy.json.JsonSlurper
-import org.apache.log4j.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * This translator is used specifically to utilize the Google Cloud Translate API to translate strings.
@@ -26,7 +27,7 @@ import org.apache.log4j.Logger
  */
 class GoogleTranslator implements DragoTranslator {
 
-    Logger logger = Logger.getLogger(this.getClass())
+    Logger logger = LoggerFactory.getLogger('Dragomock')
     private String googleSubscriptionKey
     private String sourceLocal
     private String translationLocal
@@ -65,17 +66,11 @@ class GoogleTranslator implements DragoTranslator {
         }
 
         logger.debug("Connection: ${connection.toString()}")
-        println "Connection: ${connection.toString()}"
-
         logger.debug('Response code: ' + connection.responseCode)
         logger.debug('Response message: ' + connection.responseMessage)
 
-        println 'Response code: ' + connection.responseCode
-        println 'Response message: ' + connection.responseMessage
-
         if (connection.responseCode == 200) {
             def json = new JsonSlurper().parseText(connection.inputStream.text)
-            println json.toString()
 
             ArrayList translationArray = json.data.translations
             logger.debug("TranslationArray: ${translationArray}")
