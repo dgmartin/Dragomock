@@ -51,6 +51,16 @@ class XCodeKVPWriter implements DragoWriter {
     }
 
     @Override
+    void setIndentCount(int indentCount) {
+
+    }
+
+    @Override
+    int getIndentCount() {
+        return 0
+    }
+
+    @Override
     void put(String key, String value) {
         translations.put(key, value)
     }

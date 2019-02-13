@@ -16,7 +16,11 @@
   -->
 
 <resources>
+    <string name="do_not_translate" translatable="false">If you see this in the output something went wrong</string>
     <string name="hello">hello</string>
     <string name="goodbye">goodbye</string>
+    <string name="test">test</string>
     <string name="test_string">This is a test string</string>
+    <string mock_translation="true" name="already_translated">Don't translate this Dies ist bereits übersetzt</string>
+    <string dragomock='true' name='tuesday'>Dienstag</string>
 </resources>

@@ -31,7 +31,7 @@ interface DragoWriter {
     void setOutputFile(File file)
 
     /**
-     * @return The {@link File} set as the output file
+     * @return The{@link File} set as the output file
      *
      * @since 1.0
      */
@@ -50,6 +50,20 @@ interface DragoWriter {
      * @since 1.0
      */
     String getCopyright()
+
+    /**
+     * @param indentCount The number of spaces used to indent during XML creation.
+     *
+     * @since 1.0
+     */
+    void setIndentCount(int indentCount)
+
+    /**
+     * @return The number of spaces used to indent during XML creation.
+     *
+     * @since 1.0
+     */
+    int getIndentCount()
 
     /**
      * Used to add a key-value pair to be written to the output file.

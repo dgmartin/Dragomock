@@ -35,6 +35,7 @@ class AndroidXMLWriter implements DragoWriter {
     LinkedHashMap<String, String> translations = new LinkedHashMap<>()
     File outputFile = null
     String copyright = null
+    int indentCount
 
 
     AndroidXMLWriter() {
@@ -58,6 +59,16 @@ class AndroidXMLWriter implements DragoWriter {
     @Override
     String getCopyright() {
         return copyright
+    }
+
+    @Override
+    int getIndentCount() {
+        return indentCount
+    }
+
+    @Override
+    void setIndentCount(int indentCount) {
+        this.indentCount = indentCount
     }
 
     @Override
@@ -95,14 +106,8 @@ class AndroidXMLWriter implements DragoWriter {
                 logger.debug("Existing Translations count: ${existingTranslations.size()}")
             }
         }
-
         def writer = new FileWriter(outputFile)
-        def xmlMarkup = new MarkupBuilder(writer)
-        xmlMarkup.mkp.xmlDeclaration(version: "1.0", encoding: "utf-8")
-        if (DragoUtils.isNotEmpty(getCopyright())) {
-            xmlMarkup.mkp.comment(getCopyright())
-            xmlMarkup.mkp.yield(System.getProperty("line.separator"))
-        }
+        def xmlMarkup = getMarkupBuilder(writer)
 
         logger.trace("Existing transactions array: " + existingTranslations.toString())
         logger.trace("New Translations array: " + translations.toString())
@@ -139,5 +144,23 @@ class AndroidXMLWriter implements DragoWriter {
 
         translations = null
         outputFile = null
+    }
+
+    private MarkupBuilder getMarkupBuilder(FileWriter fileWriter) {
+        def indentSpacing  = getIndentCount()
+
+        def indent = new String(new char[indentSpacing]).replace("\0", " ")
+        def indentPrinter = new IndentPrinter(fileWriter, indent)
+        def xmlMarkup = new MarkupBuilder(indentPrinter)
+
+        xmlMarkup.setDoubleQuotes(true)
+        xmlMarkup.mkp.xmlDeclaration(version: "1.0", encoding: "utf-8")
+
+        if (DragoUtils.isNotEmpty(getCopyright())) {
+            xmlMarkup.mkp.comment(getCopyright())
+            xmlMarkup.mkp.yield(System.getProperty("line.separator"))
+        }
+
+        return xmlMarkup
     }
 }

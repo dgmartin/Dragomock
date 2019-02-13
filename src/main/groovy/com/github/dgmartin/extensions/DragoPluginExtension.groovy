@@ -35,6 +35,7 @@ class DragoPluginExtension {
     final Property<File> inputFile
     final Property<File> outputDir
     final Property<String> copyright
+    final Property<Integer> indentCount
 
     DragoPluginExtension(Project project) {
         sourceLocal = project.objects.property(String.class)
@@ -58,6 +59,9 @@ class DragoPluginExtension {
 
         copyright = project.objects.property(String.class)
         copyright.set("")
+
+        indentCount = project.objects.property(Integer.class)
+        indentCount.set(2)
     }
 
     @Override
@@ -69,11 +73,12 @@ class DragoPluginExtension {
                 " googleSubscriptionKey: ${googleSubscriptionKey}" +
                 " inputFile: " + inputFile.toString() +
                 " outputDir: " + outputDir.toString() +
-                " copyright: ${copyright}"
+                " copyright: ${copyright}" +
+                " indentCount: ${indentCount}"
     }
 
     /**
-     * @return The {@link Provider} containing the two letter string representing the local of the source file to be
+     * @return The{@link Provider} containing the two letter string representing the local of the source file to be
      * translated.
      *
      * @since 1.0
@@ -92,7 +97,7 @@ class DragoPluginExtension {
     }
 
     /**
-     * @return The {@link Provider} containing the string array of the two letter codes used to determine the the
+     * @return The{@link Provider} containing the string array of the two letter codes used to determine the the
      * output language files.
      *
      * @since 1.0
@@ -111,7 +116,7 @@ class DragoPluginExtension {
     }
 
     /**
-     * @return The {@link Provider} containing the {@link FileType} used to determine how the string files are parsed in
+     * @return The{@link Provider} containing the {@link FileType} used to determine how the string files are parsed in
      * and written.
      *
      * @since 1.0
@@ -134,7 +139,7 @@ class DragoPluginExtension {
     }
 
     /**
-     * @return The {@link Provider} containing the Microsoft subscription used to enable the Translation API.
+     * @return The{@link Provider} containing the Microsoft subscription used to enable the Translation API.
      *
      * @since 1.0
      */
@@ -152,7 +157,7 @@ class DragoPluginExtension {
     }
 
     /**
-     * @return The {@link Provider} containing the Google subscription used to enable the Translation API.
+     * @return The{@link Provider} containing the Google subscription used to enable the Translation API.
      *
      * @since 1.0
      */
@@ -170,7 +175,7 @@ class DragoPluginExtension {
     }
 
     /**
-     * @return The {@link Provider} containing the {@link File} containing the strings to be translated.
+     * @return The{@link Provider} containing the {@link File} containing the strings to be translated.
      *
      * @since 1.0
      */
@@ -188,7 +193,7 @@ class DragoPluginExtension {
     }
 
     /**
-     * @return The {@link Provider} containing the output directory for the files containing the translated strings.
+     * @return The{@link Provider} containing the output directory for the files containing the translated strings.
      *
      * @since 1.0
      */
@@ -206,7 +211,7 @@ class DragoPluginExtension {
     }
 
     /**
-     * @return The {@link Provider} containing the optional copyright text that will be added to all output files.
+     * @return The{@link Provider} containing the optional copyright text that will be added to all output files.
      *
      * @since 1.0
      */
@@ -221,5 +226,23 @@ class DragoPluginExtension {
      */
     void setCopyright(String copyright) {
         this.copyright.set(copyright)
+    }
+
+    /**
+     * @return The{@link Provider} containing the number of spaces used to indent during XML creation.
+     *
+     * @since 1.0
+     */
+    Provider<Integer> getIndentCount() {
+        indentCount
+    }
+
+    /**
+     * @param indentCount The number of spaces used to indent during XML creation.
+     *
+     * @since 1.0
+     */
+    void setIndentCount(Integer indentCount) {
+        this.indentCount.set(indentCount)
     }
 }

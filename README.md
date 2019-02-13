@@ -33,6 +33,7 @@ dragomock {
     inputFile = file('/res/values/strings.xml')
     outputDir = file('/res/')
     copyright = "Your copyright goes here"
+    indentCount = 4
 }
 ~~~
 
@@ -44,14 +45,15 @@ Below is a detailed list of the different parameters and there descriptions.
 
 |Parameter Name|Required|Default|Details|
 |--|--|--|--|
-|sourceLocal|Optional|en|The two letter language code for the original language of the source file|
-|locals|Required|n/a|String array of the two letter language codes that you want translated|
-|fileType|Optional|TYPE_ANDROID_XML|Enum or string equivalent defining the values. See the [File Types](#file-types) section below for further details|
+|sourceLocal|Optional|en|The two letter language code for the original language of the source file.|
+|locals|Required|n/a|String array of the two letter language codes that you want translated.|
+|fileType|Optional|TYPE_ANDROID_XML|Enum or string equivalent defining the values. See the [File Types](#file-types) section below for further details.|
 |microsoftSubscriptionKey|Optional|n/a|The Microsoft Subscription key used to access the Microsoft Translation API. See the [Subscriptions](#subscriptions) section for further details.|
 |googleSubscriptionKey|Optional|n/a|The Google Subscription key used to access the Google Cloud Translation API. See the [Subscriptions](#subscriptions) section for further details.|
-|inputFile|Optional|&lt;root>/src/main/res/values/strings.xml|The source file that will be translated|
-|outputDir|Optional|&lt;inputFile>/../..|The directory file in which the translated file(s) will be written to|
+|inputFile|Optional|&lt;root>/src/main/res/values/strings.xml|The source file that will be translated.|
+|outputDir|Optional|&lt;inputFile>/../..|The directory file in which the translated file(s) will be written to.|
 |copyright|Optional|n/a|Copyright text that will be added to all output files.|
+|indentCount|Optional|2|The number of spaces used to indent during XML creation.|
 
 ## File Types
 
@@ -84,6 +86,11 @@ Please note that at least one subscription key must be provided. Only one transl
 If both subscription keys are provided the Google Translator service will take priority. If no subscription keys are provided an exception will be thrown.
 
 ## Release Notes
+
+#### 0.8.00
+ - Added optional "indentCount" field to control the indents on XML output
+ - Updated XML attribute from "mock_translation" to "dragomock"
+ - Fixed improper file creation on Mac computers
 
 #### 0.7.00
  - Fixed memory leak due to not properly closing a file writer

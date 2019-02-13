@@ -40,6 +40,7 @@ class Dragomock implements Plugin<Project> {
             inputFile = extension.getInputProvider()
             outputDir = extension.getOutputDirProvider()
             copyright = extension.getCopyrightProvider()
+            indentCount = extension.getIndentCount()
 
         }
     }

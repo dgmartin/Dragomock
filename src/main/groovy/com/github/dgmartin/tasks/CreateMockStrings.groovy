@@ -52,6 +52,7 @@ class CreateMockStrings extends DefaultTask {
     final Property<File> inputFile
     final Property<File> outputDir
     final Property<String> copyright
+    final Property<Integer> indentCount
 
     DragoHandler handler
 
@@ -66,6 +67,7 @@ class CreateMockStrings extends DefaultTask {
         this.inputFile = project.objects.property(File.class)
         this.outputDir = project.objects.property(File.class)
         this.copyright = project.objects.property(String.class)
+        this.indentCount = project.objects.property(Integer.class)
     }
 
     @Override
@@ -74,7 +76,8 @@ class CreateMockStrings extends DefaultTask {
                 " microsoftSubscriptionKey " + microsoftSubscriptionKey.toString() +
                 " googleSubscriptionKey " + googleSubscriptionKey.toString() +
                 " inputFile: " + inputFile.toString() +
-                " outputDir: " + outputDir.toString()
+                " outputDir: " + outputDir.toString() +
+                " indentCount: " + indentCount.toString()
     }
 
     /**
@@ -145,7 +148,7 @@ class CreateMockStrings extends DefaultTask {
     }
 
     /**
-     * @return The {@link FileType} used to determine how the string files are parsed in and written.
+     * @return The{@link FileType} used to determine how the string files are parsed in and written.
      *
      * @since 1.0
      */
@@ -220,7 +223,7 @@ class CreateMockStrings extends DefaultTask {
     }
 
     /**
-     * @return The {@link File} used to supply the strings to be translated
+     * @return The{@link File} used to supply the strings to be translated
      *
      * @since 1.0
      */
@@ -279,6 +282,27 @@ class CreateMockStrings extends DefaultTask {
 
     /**
      * <p>
+     * This is used to set the optional number of spaces used to indent during XML creation. Default is two spaces.
+     * </p>
+     *
+     * @since 1.0
+     */
+    void setIndentCount(Provider<Integer> indentCount) {
+        this.indentCount.set(indentCount)
+    }
+
+    /**
+     * @return The optional number of spaces used to indent during XML creation. Default is two spaces.
+     *
+     * @since 1.0
+     */
+    private Integer getIndentCount() {
+        logger.trace("Returning Indent Count")
+        indentCount.get()
+    }
+
+    /**
+     * <p>
      * <b>NOTE</b> Do Not Delete
      * </p>
      * <p>
@@ -324,6 +348,7 @@ class CreateMockStrings extends DefaultTask {
         DragoWriter writer = handler.getWriter()
         writer.setOutputFile(translationFile)
         writer.setCopyright(getCopyright())
+        writer.setIndentCount(getIndentCount())
 
         buildStringList(translationMap, local, writer)
 
@@ -331,7 +356,7 @@ class CreateMockStrings extends DefaultTask {
     }
 
     /**
-     * @return The {@link DragoHandler} based on the {@link FileType} provided in the build script
+     * @return The{@link DragoHandler} based on the {@link FileType} provided in the build script
      *
      * @since 1.0
      */
@@ -358,7 +383,7 @@ class CreateMockStrings extends DefaultTask {
     }
 
     /**
-     * @return The {@link DragoTranslator} based on which subscription key was provided in the build script.
+     * @return The{@link DragoTranslator} based on which subscription key was provided in the build script.
      * Returns NULL if no value was provided
      *
      * @since 1.0
@@ -368,8 +393,8 @@ class CreateMockStrings extends DefaultTask {
         DragoTranslator translator
 
         if (DragoUtils.isNotEmpty(getGoogleSubscriptionKey())) {
-            logger.debug("Creating Google Translator")
-            println "Creating Google Translator"
+            logger.debug("Creating Google Translatord")
+            println "Creating Google Translatorp"
             translator = new GoogleTranslator(getGoogleSubscriptionKey(), getSourceLocal(), local)
         } else if (DragoUtils.isNotEmpty(getMicrosoftSubscriptionKey())) {
             logger.debug("Creating Microsoft Translator")
