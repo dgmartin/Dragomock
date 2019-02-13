@@ -18,7 +18,8 @@ package com.github.dgmartin.handlers
 
 import com.github.dgmartin.writers.DragoWriter
 import com.github.dgmartin.writers.XCodeKVPWriter
-import org.apache.log4j.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * TODO Add documentation
@@ -45,7 +46,7 @@ class XCodeKVPHandler implements DragoHandler {
     def quotedTextPattern = ~/".*?"/
     public static MOCK_TRANSLATION_TAG = "#MOCK TRANSLATION"
 
-    Logger logger = Logger.getLogger(this.getClass())
+    Logger logger = LoggerFactory.getLogger('Dragomock')
     HashMap<String, String> originalMap
 
     @Override

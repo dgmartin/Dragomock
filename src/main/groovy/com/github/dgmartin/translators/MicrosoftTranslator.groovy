@@ -16,7 +16,9 @@
 
 package com.github.dgmartin.translators
 
-import org.apache.log4j.Logger
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+
 
 /**
  * This translator is used specifically to utilize the Microsoft Translation Text API to translate strings.
@@ -25,7 +27,7 @@ import org.apache.log4j.Logger
  */
 class MicrosoftTranslator implements DragoTranslator {
 
-    Logger logger = Logger.getLogger(this.getClass())
+    Logger logger = LoggerFactory.getLogger('Dragomock')
     private String microsoftSubscriptionKey
     private String sourceLocal
     private String translationLocal

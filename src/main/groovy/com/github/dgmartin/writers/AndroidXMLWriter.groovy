@@ -19,10 +19,9 @@ package com.github.dgmartin.writers
 import com.github.dgmartin.objects.ExistingTranslation
 import com.github.dgmartin.utils.DragoUtils
 import groovy.xml.MarkupBuilder
-import groovy.xml.MarkupBuilderHelper
 import groovy.xml.XmlUtil
-import org.apache.log4j.Logger
-import org.gradle.util.TextUtil
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 /**
  * This writer is specifically designed to be used with the Android String Resource system and writes all key-value
@@ -31,7 +30,7 @@ import org.gradle.util.TextUtil
  * @since 1.0
  */
 class AndroidXMLWriter implements DragoWriter {
-    Logger logger = Logger.getLogger(this.getClass())
+    Logger logger = LoggerFactory.getLogger('Dragomock')
     LinkedHashMap<String, String> translations = new LinkedHashMap<>()
     File outputFile = null
     String copyright = null
