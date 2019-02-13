@@ -50,4 +50,5 @@ dragomock {
     inputFile = file('test/values/xml_strings.xml')
     outputDir = file('test/')
     copyright = "Copyright 2017  Your Name Here\nThis is an example copyright block"
+    indentCount = 4
 }
