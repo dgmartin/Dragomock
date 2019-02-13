@@ -31,7 +31,11 @@ class Dragomock implements Plugin<Project> {
     @Override
     void apply(Project project) {
         def extension = project.extensions.create("dragomock", DragoPluginExtension, project)
-        project.task('createMockStrings', type: CreateMockStrings) {
+        def description = "Generate mock strings for this project. More details at https://github.com/dgmartin/Dragomock"
+        project.task('createMockStrings',
+                type: CreateMockStrings,
+                description: description,
+                group: "Dragomock") {
             sourceLocal = extension.getSourceLocalProvider()
             locals = extension.getLocalsProvider()
             fileType = extension.getFileTypeProvider()
