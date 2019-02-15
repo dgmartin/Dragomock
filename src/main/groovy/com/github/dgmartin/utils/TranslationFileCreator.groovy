@@ -103,7 +103,7 @@ class TranslationFileCreator {
      * Removes protective tags from translated strings.
      *
      * @param The translated string.
-     * @return The translated string with any protecttion tags removed.
+     * @return The translated string with any protection tags removed.
      *
      * @since 1.0
      */
