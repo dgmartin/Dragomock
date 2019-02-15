@@ -90,7 +90,9 @@ If both subscription keys are provided the Google Translator service will take p
 #### 0.8.00
  - Added optional "indentCount" field to control the indents on XML output
  - Updated XML attribute from "mock_translation" to "dragomock"
+ - "createMockStrings" task now assigned a group and description
  - Fixed improper file creation on Mac computers
+ - Logging now working properly
 
 #### 0.7.00
  - Fixed memory leak due to not properly closing a file writer

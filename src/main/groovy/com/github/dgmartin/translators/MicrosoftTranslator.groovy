@@ -70,8 +70,7 @@ class MicrosoftTranslator implements DragoTranslator {
 
         connection.setRequestProperty('Ocp-Apim-Subscription-Key', microsoftSubscriptionKey)
 
-        logger.debug(Connection: ' + connection.toString()')
-
+        logger.debug("Connection: ${connection.toString()}")
         logger.debug('Response code: ' + connection.responseCode)
         logger.debug('Response message: ' + connection.responseMessage)
 
