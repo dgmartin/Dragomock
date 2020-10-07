@@ -18,8 +18,10 @@ package com.github.dgmartin.extensions
 
 import com.github.dgmartin.constants.FileType
 import org.gradle.api.Project
+import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
+
 
 /**
  * This extension defies the properties that are used to input data via the build script.
@@ -28,7 +30,7 @@ import org.gradle.api.provider.Provider
  */
 class DragoPluginExtension {
     final Property<String> sourceLocal
-    final Property<List<String>> locals
+    final ListProperty<String> locals
     final Property<FileType> fileType
     final Property<String> microsoftSubscriptionKey
     final Property<String> googleSubscriptionKey
@@ -41,7 +43,7 @@ class DragoPluginExtension {
         sourceLocal = project.objects.property(String.class)
         sourceLocal.set("en")
 
-        locals = (Property<List<String>>) (Object) project.objects.property(List.class)
+        locals = project.objects.listProperty(String.class)
 
         fileType = project.objects.property(FileType.class)
         fileType.set(FileType.TYPE_ANDROID_XML)

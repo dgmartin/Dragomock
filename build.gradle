@@ -25,32 +25,42 @@ buildscript {
     }
 }
 
+plugins {
+    id 'groovy'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+
+    id 'com.gradle.plugin-publish' version '0.12.0'
+}
+apply from: "$rootDir/gradle/functional-test.gradle"
+
 group 'com.github.dgmartin'
-version '0.8.00'
+version '0.09.00'
 
 repositories {
     mavenCentral()
 }
-apply plugin: 'groovy'
-apply plugin: 'java-gradle-plugin'
-apply plugin: 'maven'
 
-apply from: "$rootDir/gradle/functional-test.gradle"
-apply plugin: "com.gradle.plugin-publish"
+publishing {
+    publications {
+        Dragomock(MavenPublication) {
+            from components.java
+        }
+    }
 
-uploadArchives {
     repositories {
-        mavenDeployer {
-            repository(url: uri("${project.getRootDir()}/Repo"))
+        maven {
+            name = 'myRepo'
+            url = "${project.getRootDir()}/Repo"
         }
     }
 }
 
 dependencies {
-    compile gradleApi()
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation gradleApi()
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
 
-    testCompile('org.spockframework:spock-core:1.1-groovy-2.4') {
+    testImplementation('org.spockframework:spock-core:1.1-groovy-2.4') {
         exclude group: 'org.codehaus.groovy'
     }
 }

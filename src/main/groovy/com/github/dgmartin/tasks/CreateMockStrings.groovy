@@ -29,6 +29,7 @@ import com.github.dgmartin.utils.DragoUtils
 import com.github.dgmartin.utils.TranslationFileCreator
 import com.github.dgmartin.writers.DragoWriter
 import org.gradle.api.DefaultTask
+import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Input
@@ -44,7 +45,7 @@ import org.gradle.api.tasks.TaskAction
  */
 class CreateMockStrings extends DefaultTask {
     final Property<String> sourceLocal
-    final Property<List<String>> locals
+    final ListProperty<String> locals
     final Property<FileType> fileType
     final Property<String> microsoftSubscriptionKey
     final Property<String> googleSubscriptionKey
@@ -59,7 +60,7 @@ class CreateMockStrings extends DefaultTask {
         logger.debug("Creating new CreateMockStrings instance.")
         logger.trace("project properties: " + project.properties.toString())
         this.sourceLocal = project.objects.property(String.class)
-        this.locals = project.objects.property(List.class)
+        this.locals = project.objects.listProperty(String.class)
         this.fileType = project.objects.property(FileType.class)
         this.microsoftSubscriptionKey = project.objects.property(String.class)
         this.googleSubscriptionKey = project.objects.property(String.class)
