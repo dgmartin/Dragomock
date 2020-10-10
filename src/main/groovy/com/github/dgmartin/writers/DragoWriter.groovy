@@ -66,6 +66,17 @@ interface DragoWriter {
     int getIndentCount()
 
     /**
+     * @param lineSeparator The line separator that will be used for line breaks when generating the final output
+     *     file.
+     */
+    void setLineSeparator(String lineSeparator)
+
+    /**
+     * Returns the current lineSeparator used in the creation of the output file.
+     */
+    String getLineSeparator()
+
+    /**
      * Used to add a key-value pair to be written to the output file.
      * @param key The string key for the pair.
      * @param value The string value for the pair

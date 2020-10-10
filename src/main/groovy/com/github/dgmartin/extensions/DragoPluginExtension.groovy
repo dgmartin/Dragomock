@@ -17,10 +17,13 @@
 package com.github.dgmartin.extensions
 
 import com.github.dgmartin.constants.FileType
+import com.github.dgmartin.constants.LineSeparator
 import org.gradle.api.Project
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
+
+import javax.sound.sampled.Line
 
 
 /**
@@ -38,6 +41,7 @@ class DragoPluginExtension {
     final Property<File> outputDir
     final Property<String> copyright
     final Property<Integer> indentCount
+    final Property<LineSeparator> lineSeparator
 
     DragoPluginExtension(Project project) {
         sourceLocal = project.objects.property(String.class)
@@ -64,6 +68,9 @@ class DragoPluginExtension {
 
         indentCount = project.objects.property(Integer.class)
         indentCount.set(2)
+
+        lineSeparator = project.objects.property(LineSeparator.class)
+        lineSeparator.set(LineSeparator.LF)
     }
 
     @Override
@@ -76,7 +83,8 @@ class DragoPluginExtension {
                 " inputFile: " + inputFile.toString() +
                 " outputDir: " + outputDir.toString() +
                 " copyright: ${copyright}" +
-                " indentCount: ${indentCount}"
+                " indentCount: ${indentCount}"   +
+                " lineSeparator: ${lineSeparator}"
     }
 
     /**
@@ -177,7 +185,7 @@ class DragoPluginExtension {
     }
 
     /**
-     * @return The{@link Provider} containing the {@link File} containing the strings to be translated.
+     * @return The {@link Provider} containing the {@link File} containing the strings to be translated.
      *
      * @since 1.0
      */
@@ -246,5 +254,23 @@ class DragoPluginExtension {
      */
     void setIndentCount(Integer indentCount) {
         this.indentCount.set(indentCount)
+    }
+
+    /**
+     * @return The{@link LineSeparator} type corresponding to the desired line separator to be used during XML creation.
+     *
+     * @since 1.0
+     */
+    Provider<LineSeparator> getLineSeparator() {
+        lineSeparator
+    }
+
+    /**
+     * @param lineSeparator The {@link LineSeparator} type to use during XML creation.
+     *
+     * @since 1.0
+     */
+    void setLineSeparator(LineSeparator lineSeparator) {
+        this.lineSeparator.set(lineSeparator)
     }
 }
