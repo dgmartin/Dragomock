@@ -18,6 +18,7 @@ package com.github.dgmartin.tasks
 
 import com.github.dgmartin.constants.FileType
 import com.github.dgmartin.constants.LineSeparator
+import com.github.dgmartin.extensions.DragoPluginExtension
 import com.github.dgmartin.handlers.AndroidHandler
 import com.github.dgmartin.handlers.CSVHandler
 import com.github.dgmartin.handlers.DragoHandler
@@ -35,6 +36,7 @@ import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 
@@ -105,6 +107,7 @@ class CreateMockStrings extends DefaultTask {
      *
      * @since 1.0
      */
+    @Input
     String getSourceLocal() {
         logger.trace("Returning SourceLocal")
         sourceLocal.isPresent() ? sourceLocal.get() : "en"
@@ -156,6 +159,7 @@ class CreateMockStrings extends DefaultTask {
      *
      * @since 1.0
      */
+    @Input
     FileType getFileType() {
         logger.trace("Returning FileType")
         fileType.get()
@@ -181,7 +185,8 @@ class CreateMockStrings extends DefaultTask {
      *
      * @since 1.0
      */
-    private String getMicrosoftSubscriptionKey() {
+    @Internal
+    String getMicrosoftSubscriptionKey() {
         logger.trace("Returning MicrosoftKey")
         microsoftSubscriptionKey.get()
     }
@@ -206,7 +211,8 @@ class CreateMockStrings extends DefaultTask {
      *
      * @since 1.0
      */
-    private String getGoogleSubscriptionKey() {
+    @Internal
+    String getGoogleSubscriptionKey() {
         logger.trace("Returning GoogleKey")
         googleSubscriptionKey.get()
     }
@@ -279,7 +285,8 @@ class CreateMockStrings extends DefaultTask {
      *
      * @since 1.0
      */
-    private String getCopyright() {
+    @Input
+    String getCopyright() {
         logger.trace("Returning Copyright")
         copyright.get()
     }
@@ -300,7 +307,8 @@ class CreateMockStrings extends DefaultTask {
      *
      * @since 1.0
      */
-    private Integer getIndentCount() {
+    @Input
+    Integer getIndentCount() {
         logger.trace("Returning Indent Count")
         indentCount.get()
     }
