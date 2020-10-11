@@ -17,6 +17,7 @@
 package com.github.dgmartin.tasks
 
 import com.github.dgmartin.constants.FileType
+import com.github.dgmartin.constants.LineSeparator
 import com.github.dgmartin.handlers.AndroidHandler
 import com.github.dgmartin.handlers.CSVHandler
 import com.github.dgmartin.handlers.DragoHandler
@@ -53,6 +54,7 @@ class CreateMockStrings extends DefaultTask {
     final Property<File> outputDir
     final Property<String> copyright
     final Property<Integer> indentCount
+    final Property<LineSeparator> lineSeparator
 
     DragoHandler handler
 
@@ -68,6 +70,7 @@ class CreateMockStrings extends DefaultTask {
         this.outputDir = project.objects.property(File.class)
         this.copyright = project.objects.property(String.class)
         this.indentCount = project.objects.property(Integer.class)
+        this.lineSeparator = project.objects.property(LineSeparator.class)
     }
 
     @Override
@@ -77,7 +80,8 @@ class CreateMockStrings extends DefaultTask {
                 " googleSubscriptionKey " + googleSubscriptionKey.toString() +
                 " inputFile: " + inputFile.toString() +
                 " outputDir: " + outputDir.toString() +
-                " indentCount: " + indentCount.toString()
+                " indentCount: " + indentCount.toString() +
+                "lineSeparator: " + lineSeparator.toString()
     }
 
     /**
@@ -303,6 +307,29 @@ class CreateMockStrings extends DefaultTask {
 
     /**
      * <p>
+     * Method for setting the optional line separator type used during XML creation. Default is equal to
+     * {@link LineSeparator#LF}.
+     * </p>
+     *
+     * @since 1.0
+     */
+    void setLineSeparator(Provider<LineSeparator> lineSeparator) {
+        this.lineSeparator.set(lineSeparator)
+    }
+
+    /**
+     * @return The optional {@link LineSeparator} type that will be used during XML creation. Default is equal to
+     * {@link LineSeparator#LF}.
+     *
+     * @since 1.0
+     */
+    private LineSeparator getLineSeparator() {
+        logger.trace("Returning Line Separator Type")
+        lineSeparator.get()
+    }
+
+    /**
+     * <p>
      * <b>NOTE</b> Do Not Delete
      * </p>
      * <p>
@@ -349,6 +376,7 @@ class CreateMockStrings extends DefaultTask {
         writer.setOutputFile(translationFile)
         writer.setCopyright(getCopyright())
         writer.setIndentCount(getIndentCount())
+        writer.setLineSeparator(getLineSeparatorCharacter())
 
         buildStringList(translationMap, local, writer)
 
@@ -422,5 +450,25 @@ class CreateMockStrings extends DefaultTask {
                 .setWriter(writer)
                 .build()
         builder.translate()
+    }
+
+    private String getLineSeparatorCharacter() {
+        String separator;
+        switch (getLineSeparator()) {
+            case LineSeparator.LF:
+                separator = "\n"
+                break
+            case LineSeparator.CRLF:
+                separator = "\r\n"
+                break
+            case LineSeparator.CR:
+                separator = "\r"
+                break
+            default:
+                throw new IllegalArgumentException("Invalid Line Separator. Must be one of: \"LF\", \"CR\", or " +
+                        "\"CRLF\". Please check your Dragomock setting in build.gradle")
+                break
+        }
+        return separator
     }
 }

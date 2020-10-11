@@ -33,7 +33,8 @@ dragomock {
     inputFile = file('/res/values/strings.xml')
     outputDir = file('/res/')
     copyright = "Your copyright goes here"
-    indentCount = 4
+    indentCount = 4    
+    lineSeparator = "CRLF"
 }
 ~~~
 
@@ -52,15 +53,18 @@ Below is a detailed list of the different parameters and there descriptions.
 |googleSubscriptionKey|Optional|n/a|The Google Subscription key used to access the Google Cloud Translation API. See the [Subscriptions](#subscriptions) section for further details.|
 |inputFile|Optional|&lt;root>/src/main/res/values/strings.xml|The source file that will be translated.|
 |outputDir|Optional|&lt;inputFile>/../..|The directory file in which the translated file(s) will be written to.|
-|copyright|Optional|n/a|Copyright text that will be added to all output files.|
+|copyright|Optional|n/a|Copyright text that will be added to all output files.<br>**Note:** This text will be copied
+ directly into the output files. If you set the line endings using the optional lineSeparator parameter it will not
+  change any line endings included in the value you set here|
 |indentCount|Optional|2|The number of spaces used to indent during XML creation.|
+|lineSeparator|Optional|LF|The type of line separator to use during XML creation. Can be one of: CR, LF, or CRLF|
 
 ## File Types
 
 #### TYPE_ANDROID_XML
 
 Used to read and output String.xml files using the standard Android project structure
-Input should be a Android resource file containing only string resources
+Input should be an Android resource file containing only string resources
 Translated files will be output as String resource file. Each requested language will be output in the following 
 location:
 > /**&lt;outputDir>**/Values-**&lt;local>**/Strings.xml
@@ -87,7 +91,13 @@ If both subscription keys are provided the Google Translator service will take p
 
 ## Release Notes
 
-#### 0.8.00
+#### 0.09.00
+ - Added optional "lineSeparator" field to control the type of line separators used in the final XML output
+ - Added the DragomockIndentPrinter to handle custom line endings when writing to file
+ - Updated Gradle wrapper from 4.4.1 to 6.6.1
+ - Fixed breaking changes connected to updating to newer Gradle version
+ 
+ #### 0.8.00
  - Added optional "indentCount" field to control the indents on XML output
  - Updated XML attribute from "mock_translation" to "dragomock"
  - "createMockStrings" task now assigned a group and description
@@ -111,6 +121,7 @@ If both subscription keys are provided the Google Translator service will take p
  - Addition of iOS Key-Value Pair String file translations
  - Addition of iOS P-Type String file translations
  - Addition of CSV String file translations
+ - Addition of Java string translation
  - Ability to define multiple input files and matching outPut directories
  - JavaDoc improvements
  - Test improvements
@@ -122,7 +133,7 @@ If both subscription keys are provided the Google Translator service will take p
 
 ## Contributing
 This is my first open source project so contributions in the form of features, code style, and best practices are 
-more than welcome. To do so submit a pull request and it will be reviewed when time allows.
+more than welcome. To do so submit a pull request, and it will be reviewed when time allows.
 
 ## License
 Copyright 2017 Daniel Martin

@@ -28,6 +28,7 @@ class XCodeKVPWriter implements DragoWriter {
     LinkedHashMap<String, String> translations = new LinkedHashMap<>()
     File outputFile = null
     String copyright = null
+    String lineSeparator
 
 
     @Override
@@ -58,6 +59,16 @@ class XCodeKVPWriter implements DragoWriter {
     @Override
     int getIndentCount() {
         return 0
+    }
+
+    @Override
+    void setLineSeparator(String lineSeparator) {
+        this.lineSeparator = lineSeparator
+    }
+
+    @Override
+    String getLineSeparator() {
+        return lineSeparator
     }
 
     @Override

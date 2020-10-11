@@ -23,19 +23,19 @@ buildscript {
 
         maven {
 //        Use this for testing the local repo
-//            url uri("../Repo")
-        
+            url uri("../Repo")
+
 //        Use this for testing with the live version
-            url "https://plugins.gradle.org/m2/"
+//            url "https://plugins.gradle.org/m2/"
         }
     }
     dependencies {
         
-//        Use this for testing the local repo
-//        classpath "com.github.dgmartin:dragomock:0.09.00"
-        
-//        Use this for testing with the live version
-        classpath "gradle.plugin.com.github.dgmartin:dragomock:0.09.00"
+//      Use this for testing the local repo
+        classpath "com.github.dgmartin:dragomock:0.09.00"
+
+//      Use this for testing with the live version
+//        classpath "gradle.plugin.com.github.dgmartin:dragomock:0.09.00"
     }
 }
 
@@ -49,6 +49,7 @@ dragomock {
 //    googleSubscriptionKey = rootProject.googleKey
     inputFile = file('test/values/xml_strings.xml')
     outputDir = file('test/')
-    copyright = "Copyright 2020  Your Name Here\nThis is an example copyright block"
+    copyright = "Copyright 2020  Your Name Here\r\nThis is an example copyright block"
     indentCount = 4
+    lineSeparator = "CRLF"
 }

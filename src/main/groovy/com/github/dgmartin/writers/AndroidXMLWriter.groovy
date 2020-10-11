@@ -18,6 +18,7 @@ package com.github.dgmartin.writers
 
 import com.github.dgmartin.objects.ExistingTranslation
 import com.github.dgmartin.utils.DragoUtils
+import com.github.dgmartin.utils.DragomockIndentPrinter
 import groovy.xml.MarkupBuilder
 import groovy.xml.XmlUtil
 import org.slf4j.Logger
@@ -35,6 +36,7 @@ class AndroidXMLWriter implements DragoWriter {
     File outputFile = null
     String copyright = null
     int indentCount
+    String lineSeparator
 
 
     AndroidXMLWriter() {
@@ -74,6 +76,16 @@ class AndroidXMLWriter implements DragoWriter {
     void put(String key, String value) {
         String formattedValue = XmlUtil.escapeXml(value)
         translations.put(key, formattedValue)
+    }
+
+    @Override
+    void setLineSeparator(String lineSeparator) {
+        this.lineSeparator = lineSeparator
+    }
+
+    @Override
+    String getLineSeparator() {
+        return lineSeparator
     }
 
     @Override
@@ -146,19 +158,22 @@ class AndroidXMLWriter implements DragoWriter {
     }
 
     private MarkupBuilder getMarkupBuilder(FileWriter fileWriter) {
-        def indentSpacing  = getIndentCount()
+        def indentSpacing = getIndentCount()
 
         def indent = new String(new char[indentSpacing]).replace("\0", " ")
-        def indentPrinter = new IndentPrinter(fileWriter, indent)
+
+        def indentPrinter = new DragomockIndentPrinter(fileWriter, indent, lineSeparator)
         def xmlMarkup = new MarkupBuilder(indentPrinter)
 
         xmlMarkup.setDoubleQuotes(true)
+        xmlMarkup.setEscapeAttributes(false)
         xmlMarkup.mkp.xmlDeclaration(version: "1.0", encoding: "utf-8")
 
         if (DragoUtils.isNotEmpty(getCopyright())) {
             xmlMarkup.mkp.comment(getCopyright())
-            xmlMarkup.mkp.yield(System.getProperty("line.separator"))
+            xmlMarkup.mkp.yield(lineSeparator)
         }
+
 
         return xmlMarkup
     }

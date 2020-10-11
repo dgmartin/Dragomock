@@ -45,6 +45,7 @@ class Dragomock implements Plugin<Project> {
             outputDir = extension.getOutputDirProvider()
             copyright = extension.getCopyrightProvider()
             indentCount = extension.getIndentCount()
+            lineSeparator = extension.getLineSeparator()
 
         }
     }
